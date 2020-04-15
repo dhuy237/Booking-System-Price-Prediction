@@ -20,14 +20,14 @@ def Linear(x_train, y_train):
     return model
 
 def svr(x_train, y_train):
-    regressor = SVR(kernel='rbf', max_iter=50000, verbose=1)
+    regressor = SVR(kernel='rbf', max_iter=5000, verbose=1)
     regressor.fit(x_train, y_train)
     return regressor
 
 if __name__ == "__main__":
     # Linear Regression model
 
-    # df = pd.read_csv('./data/data_cleaned_2.csv')
+    # df = pd.read_csv('./data/selected/data_selected.csv')
     # dataset = df.loc[:, df.columns != 'price']
 
     # X = dataset.loc[:, dataset.columns != 'city'].values
@@ -47,22 +47,22 @@ if __name__ == "__main__":
 
     # SVR
     
-    # df = pd.read_csv('./data/data_cleaned_2.csv')
-    # dataset = df.loc[:, df.columns != 'price']
+    df = pd.read_csv('./data/selected/data_selected_3.csv')
+    dataset = df.loc[:, df.columns != 'price']
 
-    # X = dataset.loc[:, dataset.columns != 'city'].values
-    # Y = df.loc[:, df.columns == 'price'].values
+    X = dataset.loc[:, dataset.columns != 'city'].values
+    Y = df.loc[:, df.columns == 'price'].values
 
-    # sc_X = preprocessing.StandardScaler()
-    # sc_Y = preprocessing.StandardScaler()
-    # X = sc_X.fit_transform(X)
-    # Y = sc_Y.fit_transform(Y)
+    sc_X = preprocessing.StandardScaler()
+    sc_Y = preprocessing.StandardScaler()
+    X = sc_X.fit_transform(X)
+    Y = sc_Y.fit_transform(Y)
 
-    # X_train, X_val_and_test, Y_train, Y_val_and_test = train_test_split(X, Y, test_size=0.3)
-    # X_val, X_test, Y_val, Y_test = train_test_split(X_val_and_test, Y_val_and_test, test_size=0.5)
+    X_train, X_val_and_test, Y_train, Y_val_and_test = train_test_split(X, Y, test_size=0.3)
+    X_val, X_test, Y_val, Y_test = train_test_split(X_val_and_test, Y_val_and_test, test_size=0.5)
 
-    # svr_model = svr(X_train, Y_train.ravel())
-    # print_result(svr_model, X_train, Y_train)
-    # print_result(svr_model, X_val, Y_val)
-    # print_result(svr_model, X_test, Y_test)
+    svr_model = svr(X_train, Y_train.ravel())
+    print_result(svr_model, X_train, Y_train)
+    print_result(svr_model, X_val, Y_val)
+    print_result(svr_model, X_test, Y_test)
 

@@ -28,29 +28,27 @@ def GradientBoosting(x_train, y_train):
     return grad
 
 if __name__ == "__main__":
-    df = pd.read_csv('./data/data_cleaned_2.csv')
+    df = pd.read_csv('./data/selected/data_selected_3.csv')
+
     dataset = df.loc[:, df.columns != 'price']
 
     X = dataset.loc[:, dataset.columns != 'city'].values
     Y = df.loc[:, df.columns == 'price'].values
 
-    # min_max_scaler = preprocessing.MinMaxScaler()
-    # X_scale = min_max_scaler.fit_transform(X)
-
     X_train, X_val_and_test, Y_train, Y_val_and_test = train_test_split(X, Y, test_size=0.3)
     X_val, X_test, Y_val, Y_test = train_test_split(X_val_and_test, Y_val_and_test, test_size=0.5)
 
-    # forest = RandomForest(X_train, Y_train.ravel())
-    # print_result(forest, X_train, Y_train)
-    # print_result(forest, X_val, Y_val)
-    # print_result(forest, X_test, Y_test)
+    forest = RandomForest(X_train, Y_train.ravel())
+    print_result(forest, X_train, Y_train)
+    print_result(forest, X_val, Y_val)
+    print_result(forest, X_test, Y_test)
 
     # bag = Bagging(X_train, Y_train.ravel())
     # print_result(bag, X_train, Y_train)
     # print_result(bag, X_val, Y_val)
     # print_result(bag, X_test, Y_test)
 
-    grad = GradientBoosting(X_train, Y_train.ravel())
-    print_result(grad, X_train, Y_train)
-    print_result(grad, X_val, Y_val)
-    print_result(grad, X_test, Y_test)
+    # grad = GradientBoosting(X_train, Y_train.ravel())
+    # print_result(grad, X_train, Y_train)
+    # print_result(grad, X_val, Y_val)
+    # print_result(grad, X_test, Y_test)
