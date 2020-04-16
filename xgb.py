@@ -13,14 +13,14 @@ def print_result(model, x_val, y_val):
     print('R2: ', metrics.r2_score(y_val, y_pred_val))
 
 def XGB(x_train, y_train):
-    xgb = xgboost.XGBRegressor(learning_rate=0.01, n_estimators=1000, max_depth=12,
-                                subsample=0.8, colsample_bytree=0.3, gamma=1)
+    xgb = xgboost.XGBRegressor(learning_rate=0.01, n_estimators=1200, max_depth=15,
+                                subsample=0.8, colsample_bytree=0.5, gamma=1)
 
     xgb.fit(x_train, y_train, verbose=True)
     return xgb
 
 if __name__ == "__main__":
-    df = pd.read_csv('./data/selected/data_selected_3.csv')
+    df = pd.read_csv('./data/selected/data_selected_2.csv')
 
     dataset = df.loc[:, df.columns != 'price']
 
